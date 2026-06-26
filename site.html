@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Золотой Мост — Владивосток</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+
+        :root {
+            --bg-light: #F6F5F0;
+            --bg-darker: #EAE7DE;
+            --accent-green: #677465;
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+            --border-color: #D4D1C6;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Общие классы */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 1px;
+            background-color: var(--accent-green);
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        #home {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/%D0%97%D0%BE%D0%BB%D0%BE%D1%82%D0%BE%D0%B9_%D0%BC%D0%BE%D1%81%D1%82..jpg/1280px-%D0%97%D0%BE%D0%BB%D0%BE%D1%82%D0%BE%D0%B9_%D0%BC%D0%BE%D1%81%D1%82..jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-light {
+            background-color: var(--text-light);
+            color: var(--text-dark);
+        }
+
+        .btn-light:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-light);
+            color: var(--text-dark);
+        }
+
+
+        #stats {
+            background-color: var(--bg-darker);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background-color: var(--accent-green);
+            color: var(--text-light);
+            padding: 40px 30px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+        }
+
+        .stat-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+        }
+
+        .stat-card p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+
+        .stats-details {
+            margin-top: 60px;
+            padding-top: 50px;
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .stats-details p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+
+        #history {
+            background-color: var(--bg-light);
+        }
+
+        .history-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .history-text {
+            flex: 1;
+        }
+
+        .history-text p {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 20px;
+            max-width: 500px;
+        }
+
+        .history-image-wrap {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .history-image-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .history-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .timeline-card {
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 8px;
+            background-color: transparent;
+        }
+
+        .timeline-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .timeline-card h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-green);
+        }
+
+        .timeline-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        .bottom-banner {
+            width: 100%;
+            height: 500px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Vladivostok_Zolotoy_Rog_Bay_P8050527_2200.jpg/1280px-Vladivostok_Zolotoy_Rog_Bay_P8050527_2200.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        footer {
+            background-color: var(--bg-darker);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid var(--border-color);
+        }
+
+
+        .animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+
+        @media (max-width: 1024px) {
+            .stats-grid, .history-timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .hero-content h1 { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .history-top {
+                flex-direction: column;
+            }
+            .stats-grid, .history-timeline {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="home">
+        <div class="hero-overlay"></div>
+        <header>
+            <a href="#home" class="logo">ЗОЛОТОЙ МОСТ</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#stats">Характеристики</a></li>
+                    <li><a href="#history">История</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="hero-content">
+            <h1 class="animate">Символ Владивостока &<br>Архитектурный шедевр</h1>
+            <p class="animate delay-1">Вантовый мост через бухту Золотой Рог. Соединяет центр города с отдаленными районами и является главным достижением Дальнего Востока.</p>
+            <div class="hero-buttons animate delay-2">
+                <a href="#stats" class="btn btn-light">Характеристики</a>
+                <a href="#history" class="btn btn-outline">Читать историю</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats">
+        <div class="container">
+            <div class="section-label animate">Характеристики моста</div>
+            <h2 class="animate">Технические особенности<br>и масштабы проекта</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card animate delay-1">
+                    <div class="stat-icon">1</div>
+                    <h3>Протяженность</h3>
+                    <p>Длина моста по главному пролёту составляет 1388,09 м, а общая протяженность с учетом эстакад достигает 2,1 км.</p>
+                </div>
+                <div class="stat-card animate delay-2">
+                    <div class="stat-icon">2</div>
+                    <h3>Пилоны</h3>
+                    <p>Уникальные пилоны имеют V-образную форму. Их высота от уровня ростверков составляет внушительные 226,25 метров.</p>
+                </div>
+                <div class="stat-card animate delay-3">
+                    <div class="stat-icon">3</div>
+                    <h3>Судоходство</h3>
+                    <p>Подмостовой габарит над водой равен 64,25 м, что обеспечивает беспрепятственный проход крупных морских судов в бухту.</p>
+                </div>
+                <div class="stat-card animate delay-4">
+                    <div class="stat-icon">4</div>
+                    <h3>Трафик</h3>
+                    <p>Ширина моста — 28,5 метров. Предусмотрено 6 полос для движения автомобилей, что значительно разгрузило центр города.</p>
+                </div>
+            </div>
+
+            <div class="stats-details animate delay-2">
+                <p>Мост через бухту Золотой Рог во Владивостоке построен из российской стали, собранной в укрупненные блоки на Находкинском судоремонтном заводе. Ванты для этого уникального сооружения изготовила французская фирма «Фрейссине Интернасьональ энд Компани».</p>
+                <p>Конструкция представляет собой вантовое двухпилонное пролётное строение с веерообразным расположением вант и длиной главного пролёта в 737 метров. Инженерный расчет обеспечивает высокую надежность: мост способен выдерживать порывы ветра до 47 м/с и сейсмическую нагрузку до 8 баллов.</p>
+                <p>В рамках комплексного проекта было также предусмотрено строительство автодорожного тоннеля длиной около 250 метров. Он сооружён открытым способом и включает четыре полосы движения — по две в каждом направлении, разделенные между собой сплошной общей стенкой.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="history">
+        <div class="container">
+            <div class="history-top">
+                <div class="history-text">
+                    <div class="section-label animate">История</div>
+                    <h2 class="animate delay-1">От имперской идеи<br>до саммита АТЭС.</h2>
+                    <p class="animate delay-2">Идея строительства моста через бухту Золотой Рог выдвигалась ещё в конце XIX века. Однако масштабный проект был реализован только в современной России.</p>
+                    <p class="animate delay-3">Строительство велось в рамках программы подготовки Владивостока к проведению саммита АТЭС. Сегодня этот мост — не просто транспортная артерия, но и главная туристическая достопримечательность региона.</p>
+                </div>
+                <div class="history-image-wrap animate delay-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Zolotoy_Bridge_%28October_2024%29.jpg/1280px-Zolotoy_Bridge_%28October_2024%29.jpg" alt="Золотой Мост Владивосток">
+                </div>
+            </div>
+
+            <div class="history-timeline">
+                <div class="timeline-card animate delay-1">
+                    <h4>Конец XIX века</h4>
+                    <p>Первые обсуждения строительства переправы для связи центра города с удаленным мысом Чуркин.</p>
+                </div>
+                <div class="timeline-card animate delay-2">
+                    <h4>1969 год</h4>
+                    <p>Мост впервые официально включён в генеральный план застройки города Владивостока.</p>
+                </div>
+                <div class="timeline-card animate delay-3">
+                    <h4>2008 год</h4>
+                    <p>Начало активной фазы строительства в рамках федеральной подготовки к международному саммиту АТЭС.</p>
+                </div>
+                <div class="timeline-card animate delay-4">
+                    <h4>11 августа 2012</h4>
+                    <p>Состоялась торжественная церемония открытия моста и запуск движения по всем 6 полосам.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bottom-banner animate"></div>
+
+    <footer>
+        © 2026 Безъязыкова Анастасия Андреевна. ДВФУ, «Технологии анализа цифрового следа»
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.animate');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
